@@ -34,7 +34,7 @@ Select test framework:
   2: TestNG
   3: Spock
   4: JUnit Jupiter
-Enter selection (default: JUnit 4) [1..4] 1
+Enter selection (default: JUnit 4) [1..4] 4
 
 Project name (default: gradle-spring-boot-skeleton):
 Source package (default: gradle.spring.boot.skeleton):
