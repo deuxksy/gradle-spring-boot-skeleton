@@ -1,0 +1,64 @@
+spring:
+  profiles:
+    active: local
+---
+
+spring:
+  profiles: local
+  datasource:
+    type: com.zaxxer.hikari.HikariDataSource
+    username: "sa"
+    password:
+    driver-class-name: net.sf.log4jdbc.sql.jdbcapi.DriverSpy
+    url: jdbc:log4jdbc:h2:mem:testdb;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
+    hikari:
+      connection-timeout: 10000
+      minimum-idle: 2
+      maximum-pool-size: 3
+      pool-name: ${spring.application.name}-pool
+  devtools:
+    restart:
+      enabled: true
+    livereload:
+      enabled: true
+      port: 35730
+  jpa:
+    properties:
+      hibernate.format_sql: true
+      hibernate.use_sql_comments: true
+      hibernate.jdbc.lob.non_contextual_creation: true
+      hibernate.jdbc.diralect: org.hibernate.dialect.PostgreSQL95Dialect
+    hibernate:
+      # ddl-auto 설정
+      # none: 기본 값이며 아무 일도 일어나지 않는다.
+      # create: 데이터베이스를 drop 한 후, 데이터베이스를 새로 생성한다.
+      # create-drop: SessionFactory가 시작될 때 스키마를 drop하고 재생성하며, SessionFactory가 종료될 때도 스키마를 drop 한다.
+      # validate: 데이터베이스 스키마를 검증 한다.
+      # update: 데이터베이스 스키마를 갱신 한다.
+      ddl-auto: create-drop
+    show-sql: true
+    open-in-view: true
+    database-platform: org.hibernate.dialect.PostgreSQL95Dialect
+  messages:
+    basename: i18n/messages
+    encoding: UTF-8
+    fallback-to-system-locale: true
+  flyway:
+    enabled: false
+    baseline-on-migrate: true
+
+logging:
+  file:
+    path: ./logs
+    name: spring.log
+  pattern:
+    console: ${CONSOLE_LOG_PATTERN:%clr(%d{${LOG_DATEFORMAT_PATTERN:yyyy-MM-dd HH:mm:ss.SSS}}){faint} %clr(${LOG_LEVEL_PATTERN:%5p}) %clr(${PID:- }){magenta} %clr(---){faint} %clr([%15.15t]){faint} %clr(%-40.40logger{39}){cyan} %clr(:){faint} %m (%file:%line\) %n${LOG_EXCEPTION_CONVERSION_WORD:%wEx}}
+  level:
+    ROOT: info
+    #    org.springframework.boot: info
+    #    org.springframework.boot.autoconfigure.logging.ConditionEvaluationReportLoggingListener.debug: debug
+    #    org.springframework.boot.devtools: debug
+    #    org.springframework.web: debug
+    org.springframework.web.filter: debug
+    org.hibernate.SQL: debug
+    org.hibernate.type.descriptor.sql: trace
