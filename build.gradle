@@ -7,31 +7,49 @@
  */
 
 plugins {
-    // Apply the java plugin to add support for Java
     id 'java'
-
-    // Apply the application plugin to add support for building a CLI application.
     id 'application'
+
+    /**
+     * jetbrain idea 를 위한 plugin 추가
+     */
+    id "idea"
+    /**
+     * spring boot 위한 plugin 추가
+     */
+    id 'org.springframework.boot' version '2.2.4.RELEASE'
+    id 'io.spring.dependency-management' version '1.0.9.RELEASE'
+
+}
+
+wrapper {
+    gradleVersion = gradleVersion
+    distributionType = Wrapper.DistributionType.BIN
+}
+
+/**
+ * gradlew test 를 이용한 방법은 가능 하지만 idea 에서 안될수도 있어서 추가 필요함
+ */
+test {
+    //enabled = false //false 선언 하면 test 무시 하고 넘어감
+    useJUnitPlatform()
 }
 
 repositories {
-    // Use jcenter for resolving dependencies.
-    // You can declare any Maven/Ivy/file repository here.
+    // repository 2곳 이상 하기 가끔 maven 에는 있는됭 jcenter 에 없는게 있고 반대인 경우도 있음
+    mavenCentral()
     jcenter()
+    // maven { url "${mavenUrl}" } // 사설 repository 추가 할경우
 }
 
 dependencies {
-    // This dependency is used by the application.
-    implementation 'com.google.guava:guava:28.1-jre'
+    // Spring Boot
+    implementation 'org.springframework.boot:spring-boot-starter-web'
 
-    // Use JUnit Jupiter API for testing.
-    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.5.2'
-
-    // Use JUnit Jupiter Engine for testing.
-    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.5.2'
-}
-
-application {
-    // Define the main class for the application.
-    mainClassName = 'gradle.spring.boot.skeleton.App'
+    // JUnit Jupiter
+    testImplementation ("org.springframework.boot:spring-boot-starter-test") {
+        exclude module: "junit"
+    }
+    testImplementation "org.junit.jupiter:junit-jupiter-api:${junitJupiter}"
+    testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine:${junitJupiter}"
 }

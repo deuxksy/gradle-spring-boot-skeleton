@@ -3,12 +3,18 @@
  */
 package gradle.spring.boot.skeleton;
 
-import org.junit.Test;
-import static org.junit.Assert.*;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 
-public class AppTest {
-    @Test public void testAppHasAGreeting() {
+import static org.junit.jupiter.api.Assertions.*;
+
+@ExtendWith(SpringExtension.class)
+@SpringBootTest
+class AppTest {
+    @Test public void appHasAGreeting() {
         App classUnderTest = new App();
-        assertNotNull("app should have a greeting", classUnderTest.getGreeting());
+        assertEquals(classUnderTest.getGreeting(), "Hello world");
     }
 }

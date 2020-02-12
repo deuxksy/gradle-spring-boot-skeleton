@@ -3,12 +3,30 @@
  */
 package gradle.spring.boot.skeleton;
 
-public class App {
-    public String getGreeting() {
-        return "Hello world.";
-    }
+import org.springframework.boot.CommandLineRunner;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.Bean;
 
-    public static void main(String[] args) {
-        System.out.println(new App().getGreeting());
-    }
+import java.util.Arrays;
+
+@SpringBootApplication
+public class App {
+
+  public static void main(String[] args) {
+    SpringApplication.run(App.class, args);
+  }
+
+  public String getGreeting() {
+    return "Hello world";
+  }
+
+  @Bean
+  public CommandLineRunner commandLineRunner(ApplicationContext ctx) {
+    return args -> {
+      System.out.println("Spring Boot");
+    };
+  }
+
 }
