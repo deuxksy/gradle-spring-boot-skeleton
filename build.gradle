@@ -51,16 +51,23 @@ dependencies {
   implementation "org.springframework.boot:spring-boot-starter-web"
   implementation "org.springframework.boot:spring-boot-devtools"
   implementation "org.springframework.boot:spring-boot-starter-data-jpa"
-  implementation "org.bgee.log4jdbc-log4j2:log4jdbc-log4j2-jdbc4.1:${log4Jdbc}"
+  implementation "org.springframework.boot:spring-boot-starter-hateoas"
 
   // DB
   implementation "com.zaxxer:HikariCP" // connection pool
   implementation "org.flywaydb:flyway-core" //db 자동화
   implementation "com.h2database:h2" // 메모리 db 사용
+  implementation "org.bgee.log4jdbc-log4j2:log4jdbc-log4j2-jdbc4.1:${log4Jdbc}"
 
   // web enable
   compileOnly "javax.servlet:jstl"
   compileOnly "javax.servlet:javax.servlet-api"
+
+  // lombok
+  compileOnly "org.projectlombok:lombok"
+  annotationProcessor "org.projectlombok:lombok"
+
+  implementation "org.modelmapper:modelmapper:${modelMapper}"
 
   // JUnit Jupiter
   testImplementation("org.springframework.boot:spring-boot-starter-test") {
@@ -68,6 +75,7 @@ dependencies {
   }
   testImplementation "org.junit.jupiter:junit-jupiter-api:${junitJupiter}"
   testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine:${junitJupiter}"
-  // db
   testRuntimeOnly "com.h2database:h2"
+  testCompileOnly "org.projectlombok:lombok"
+  testAnnotationProcessor "org.projectlombok:lombok"
 }
