@@ -22,6 +22,10 @@ plugins {
 
 }
 
+/**
+ * gradle wrapper 사용시 버전 명시
+ * CircleCI 같은 CI/CD 에서는 참조 해서 사용
+ */
 wrapper {
     gradleVersion = gradleVersion
     distributionType = Wrapper.DistributionType.BIN
