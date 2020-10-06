@@ -6,3 +6,5 @@
 build
 out
 logs
+application.port
+application.pidF

@@ -4,6 +4,8 @@ spring:
 ---
 
 spring:
+  application:
+    name: gradle-spring-boot-skeleton
   profiles: local
   datasource:
     type: com.zaxxer.hikari.HikariDataSource
@@ -50,7 +52,6 @@ spring:
 logging:
   file:
     path: ./logs
-    name: spring.log
   pattern:
     console: ${CONSOLE_LOG_PATTERN:%clr(%d{${LOG_DATEFORMAT_PATTERN:yyyy-MM-dd HH:mm:ss.SSS}}){faint} %clr(${LOG_LEVEL_PATTERN:%5p}) %clr(${PID:- }){magenta} %clr(---){faint} %clr([%15.15t]){faint} %clr(%-40.40logger{39}){cyan} %clr(:){faint} %m (%file:%line\) %n${LOG_EXCEPTION_CONVERSION_WORD:%wEx}}
   level:
