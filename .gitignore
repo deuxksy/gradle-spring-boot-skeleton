@@ -7,4 +7,4 @@ build
 out
 logs
 application.port
-application.pidF
+application.pid
