@@ -13,7 +13,7 @@ import org.springframework.hateoas.MediaTypes;
 @RequestMapping(value = "/todo", produces = MediaTypes.HAL_JSON_VALUE)
 @Slf4j
 @RequiredArgsConstructor
-public class TodoController {
+public class TodoRestController {
 
   private final TodoService todoService;
 
@@ -30,17 +30,20 @@ public class TodoController {
                          .body(todo);
   }
 
+  @PutMapping("/{id}")
   public ResponseEntity put(@PathVariable Long id, @RequestBody TodoDTO todoDTO) {
     return ResponseEntity.ok()
                          .body(todoService.updateById(id, todoDTO));
   }
 
+  @DeleteMapping
   public ResponseEntity delete(@PathVariable("id") Long id) {
     todoService.deleteById(id);
     return ResponseEntity.ok()
                          .body(id);
   }
 
+  @GetMapping
   public PagedModel list(Pageable pageable, PagedResourcesAssembler pagedResourcesAssembler) {
     return pagedResourcesAssembler.toModel(todoService.findAll(pageable));
   }

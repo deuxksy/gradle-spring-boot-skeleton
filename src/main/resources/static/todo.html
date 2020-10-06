@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script>
+function to_ajax(){
+  var queryString = $("form[name=todo]").serialize() ;
+  $.ajax({
+    type : 'post',
+    url : '/todo',
+    data : queryString,
+    contentType: 'application/json',
+    error: function(xhr, status, error){
+      alert(error);
+    },
+    success : function(json){
+      alert(json)
+    },
+  });
+}
+  </script>
+</head>
+<body>
+<form name="todo" action="/todo" method="post" >
+  <input type="text" name="name" value="asd">
+  <input type="submit">
+</form>
+</body>
+</html>
